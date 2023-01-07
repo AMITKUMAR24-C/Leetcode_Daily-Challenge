@@ -1,0 +1,30 @@
+class Solution {
+  public: bool wordPattern(string pattern, string s) {
+    s = s + ' ';
+    int n = s.size();
+    vector < string > str;
+    string pr = "";
+    for (int i = 0; i < n; i++) {
+      if (s[i] != ' ') {
+        pr += s[i];
+      } else {
+        str.push_back(pr);
+        pr = "";
+      }
+    }
+    int n1 = str.size();
+    int n2 = pattern.size();
+    if (n1 != n2)
+      return false;
+    for (int i = 0; i < n1 - 1; i++) {
+      for (int j = i + 1; j < n1; j++) {
+        if ((pattern[i] == pattern[j] && str[i] == str[j]) || (pattern[i] != pattern[j] && str[i] != str[j])) {
+          continue;
+        } else {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+};
